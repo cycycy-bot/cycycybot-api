@@ -14,9 +14,14 @@ const { catchAsync } = require('../utils');
 const login = require('./controllers/login');
 const guilds = require('./controllers/guilds');
 const guild = require('./controllers/guild');
+const role = require('./controllers/roles');
 
 router.get('/login', (req, res) => {
   login.handleLogin(req, res);
+});
+
+router.post('/getroles', (req, res) => {
+  role.getRoles(req, res, fetch);
 });
 
 router.post('/getguilds', (req, res) => {
