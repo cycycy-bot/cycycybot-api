@@ -26,10 +26,20 @@ const addMod = {
       modName: args.modName,
     });
 
-    return Mod.find({ serverID: args.serverID }).then((res) => {
-      if (res.length >= 1) throw new Error('Mod already exists in the server');
-      return mod.save();
-    });
+    // return Mod.find({ serverID: args.serverID }).then((res) => {
+    //   if (res.length >= 1) throw new Error('Mod already exists in the server');
+    //   return mod.save();
+    // });
+    Mod.findOneAndUpdate(
+      { serverID: args.serverID },
+      { serverName: args.serverName, modName: args.modName },
+      {
+        new: true,
+        upsert: true,
+        setDefaultsOnInsert: true,
+        useFindAndModify: false,
+      },
+    ).then(res => res);
   },
 };
 
@@ -40,7 +50,7 @@ const delMod = {
     serverID: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve(parent, args) {
-    return Mod.deleteOne({ serverID: args.serverID });
+    return Mod.findOneAndDelete({ serverID: args.serverID });
   },
 };
 
