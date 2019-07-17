@@ -26,10 +26,6 @@ const addMod = {
       modName: args.modName,
     });
 
-    // return Mod.find({ serverID: args.serverID }).then((res) => {
-    //   if (res.length >= 1) throw new Error('Mod already exists in the server');
-    //   return mod.save();
-    // });
     Mod.findOneAndUpdate(
       { serverID: args.serverID },
       { serverName: args.serverName, modName: args.modName },

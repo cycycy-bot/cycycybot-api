@@ -8,7 +8,7 @@ const {
 } = graphql;
 
 // banphrase type
-const { BanPhraseType } = require('../types/banPhraseType');
+const { BanPhraseType } = require('../types/banphrasetype');
 
 const addBanPhrase = {
   type: BanPhraseType,

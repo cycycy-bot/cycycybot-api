@@ -44,6 +44,7 @@ router.post('/callback', catchAsync(async (req, res) => {
       },
     });
   const json = await response.json();
+  console.log(json);
   res.status(200).json(json);
 }));
 

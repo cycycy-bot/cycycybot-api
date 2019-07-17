@@ -44,7 +44,7 @@ const delCmd = {
     commandName: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve(parent, args) {
-    return Cmd.deleteOne({ serverID: args.serverID, commandName: args.commandName });
+    return Cmd.findOneAndDelete({ serverID: args.serverID, commandName: args.commandName });
   },
 };
 
@@ -53,11 +53,13 @@ const editCmd = {
   args: {
     serverID: { type: new GraphQLNonNull(GraphQLString) },
     commandName: { type: new GraphQLNonNull(GraphQLString) },
+    commandRes: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve(parent, args) {
-    return Cmd.updateOne(
+    return Cmd.findOneAndUpdate(
       { serverID: args.serverID, commandName: args.commandName },
       { commandRes: args.commandRes },
+      { useFindAndModify: false },
     );
   },
 };
