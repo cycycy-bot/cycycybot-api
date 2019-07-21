@@ -4,6 +4,7 @@ const graphql = require('graphql');
 const { mod } = require('./queries/modQuery');
 const { banphrases } = require('./queries/banPhraseQuery');
 const { customcommands } = require('./queries/customCommandQuery');
+const { logger } = require('./queries/loggerQuery');
 
 // mutations
 const { addMod, delMod } = require('./mutations/addDelMod');
@@ -23,6 +24,7 @@ const RootQuery = new GraphQLObjectType({
     mod,
     banphrases,
     customcommands,
+    logger,
   },
 });
 

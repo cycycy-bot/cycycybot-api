@@ -12,7 +12,7 @@ const getGuilds = (req, res, fetch) => {
   })
     .then(apiRes => apiRes.json())
     .then((guilds) => {
-      const adminGuilds = guilds.filter(g => g.permissions === 2146959359);
+      const adminGuilds = guilds.filter(g => g.permissions === 2147483647);
       return adminGuilds;
     });
 
@@ -36,7 +36,9 @@ const getGuilds = (req, res, fetch) => {
       });
       return user;
     })
-    .then(guilds => res.status(200).json(guilds))
+    .then((guilds) => {
+      res.status(200).json(guilds);
+    })
     .catch(() => res.status(404).json({
       error: 'Error',
     }));

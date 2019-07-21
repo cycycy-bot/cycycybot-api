@@ -15,6 +15,7 @@ const login = require('./controllers/login');
 const guilds = require('./controllers/guilds');
 const guild = require('./controllers/guild');
 const role = require('./controllers/roles');
+const channel = require('./controllers/channels');
 
 router.get('/login', (req, res) => {
   login.handleLogin(req, res);
@@ -22,6 +23,10 @@ router.get('/login', (req, res) => {
 
 router.post('/getroles', (req, res) => {
   role.getRoles(req, res, fetch);
+});
+
+router.post('/getchannels', (req, res) => {
+  channel.getChannels(req, res, fetch);
 });
 
 router.post('/getguilds', (req, res) => {
@@ -44,7 +49,6 @@ router.post('/callback', catchAsync(async (req, res) => {
       },
     });
   const json = await response.json();
-  console.log(json);
   res.status(200).json(json);
 }));
 
