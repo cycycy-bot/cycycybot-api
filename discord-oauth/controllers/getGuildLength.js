@@ -10,7 +10,6 @@ const getGuildLength = (req, res, fetch) => {
   })
     .then(apiRes => apiRes.json())
     .then((guilds) => {
-      console.log(guilds);
       res.status(200).json(
         guilds.length,
       );

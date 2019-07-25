@@ -8,7 +8,7 @@ const {
 } = graphql;
 
 // mod type
-const { ModType } = require('../types/modtype');
+const { ModType } = require('../types/modType');
 
 const addMod = {
   type: ModType,
