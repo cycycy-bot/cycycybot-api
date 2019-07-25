@@ -2,17 +2,24 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
+const morgan = require('morgan');
 const cors = require('cors');
 const schema = require('./schema/schema');
 require('dotenv').config();
 
 const app = express();
 
+// use morgan to log requests to the console
+app.use(morgan('dev'));
+
 // allow cors
 app.use(cors());
 
 // use body parser
 app.use(bodyparser.json());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyparser.urlencoded({ extended: true }));
 
 // connect to db
 mongoose.connect(process.env.DB_PASS, { useNewUrlParser: true });

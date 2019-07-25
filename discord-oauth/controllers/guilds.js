@@ -1,7 +1,7 @@
 const { BOT_TOKEN } = process.env;
 
 const getGuilds = (req, res, fetch) => {
-  const { token } = req.body;
+  const token = res.locals.decoded.access_token.access_token;
 
   const fetchUserGuilds = fetch('https://discordapp.com/api/users/@me/guilds', {
     method: 'get',
