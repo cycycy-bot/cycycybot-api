@@ -4,7 +4,7 @@ const ModDB = require('../../models/modDBtest');
 const { GraphQLString } = graphql;
 
 // modtype
-const { ModType } = require('../types/modType');
+const { ModType } = require('../types/modtype');
 
 const mod = {
   type: ModType,
