@@ -20,7 +20,16 @@ const getUser = (req, res, fetch) => {
         .then(disRes => disRes.json())
         .then((tokenRes) => {
           res.status(200).json(tokenRes);
+        })
+        .catch((error) => {
+          res.status(500).json({
+            error,
+          });
         });
+    });
+  } else {
+    res.status(500).json({
+      error: 'No token provided',
     });
   }
 };
