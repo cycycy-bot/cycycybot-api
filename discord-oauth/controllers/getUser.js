@@ -6,7 +6,7 @@ const getUser = (req, res, fetch) => {
   if (token) {
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
-        return res.status(500).json({ error: 'invalid token' });
+        return res.status(500).json({ error: err });
       }
       const accessToken = decoded.access_token.access_token;
       fetch('https://discordapp.com/api/users/@me',

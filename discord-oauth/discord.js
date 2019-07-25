@@ -85,7 +85,7 @@ router.post('/callback', catchAsync(async (req, res) => {
   if (json.access_token) {
     const payload = { check: true, access_token: json };
     const token = jwt.sign(payload, process.env.SECRET, {
-      expiresIn: 1440,
+      expiresIn: 604800,
     });
     return res.status(200).json(token);
   }
