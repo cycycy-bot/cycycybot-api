@@ -27,7 +27,9 @@ router.use('/protected', (req, res, next) => {
 
 const { CLIENT_ID } = process.env;
 const { CLIENT_SECRET } = process.env;
-const redirect = encodeURIComponent('https://bot.cycycy.me/redirect');
+// const redirect = encodeURIComponent('https://bot.cycycy.me/redirect');
+// dev redirect
+const redirect = encodeURIComponent('http://localhost:3000/redirect');
 
 const fetch = require('node-fetch');
 const btoa = require('btoa');
@@ -88,6 +90,7 @@ router.post('/callback', catchAsync(async (req, res) => {
     const token = jwt.sign(payload, process.env.SECRET, {
       expiresIn: 604800,
     });
+    res.header('access-token', token);
     return res.status(200).json(token);
   }
   return res.status(500).json({

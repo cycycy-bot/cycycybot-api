@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const schema = require('./schema/schema');
 require('dotenv').config();
 
@@ -27,16 +28,34 @@ mongoose.connection.once('open', () => {
   console.log('connected to db');
 });
 
+app.use('/graphql', (req, res, next) => {
+  // check header for the token
+  const token = req.headers['access-token'];
+  // decode token
+  if (token) {
+    // verifies secret and checks if the token is expired
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        return res.json({ message: 'invalid token' });
+      }
+      // if everything is good, save to request for use in other routes
+      res.locals.decoded = decoded;
+      next();
+    });
+  } else {
+    // if there is no token
+    res.send({
+      message: 'No token provided.',
+    });
+  }
+});
+
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true,
 }));
 
 app.use('/api/discord', require('./discord-oauth/discord'));
-
-app.listen(5000, () => {
-  console.log('Listening on port 5000...');
-});
 
 app.use((err, req, res, next) => {
   switch (err.message) {
@@ -51,4 +70,8 @@ app.use((err, req, res, next) => {
         error: err.message,
       });
   }
+});
+
+app.listen(5000, () => {
+  console.log('Listening on port 5000...');
 });
