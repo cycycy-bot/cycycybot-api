@@ -27,9 +27,9 @@ router.use('/protected', (req, res, next) => {
 
 const { CLIENT_ID } = process.env;
 const { CLIENT_SECRET } = process.env;
-// const redirect = encodeURIComponent('https://bot.cycycy.me/redirect');
+const redirect = encodeURIComponent('https://bot.cycycy.me/redirect');
 // dev redirect
-const redirect = encodeURIComponent('http://localhost:3000/redirect');
+// const redirect = encodeURIComponent('http://localhost:3000/redirect');
 
 const fetch = require('node-fetch');
 const btoa = require('btoa');
