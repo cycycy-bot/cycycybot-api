@@ -7,6 +7,12 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const schema = require('./schema/schema');
 require('dotenv').config();
+require('@google-cloud/profiler').start({
+  serviceContext: {
+    service: 'your-service',
+    version: '1.0.0',
+  },
+});
 
 const app = express();
 
